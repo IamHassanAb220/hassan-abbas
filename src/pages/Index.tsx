@@ -6,7 +6,7 @@ const Index = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "summary", "experience", "skills", "projects", "education", "contact"];
+      const sections = ["hero", "experience", "skills", "projects", "about", "contact"];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -34,11 +34,10 @@ const Index = () => {
 
   const navItems = [
     { id: "hero", label: "Home" },
-    { id: "summary", label: "Summary" },
     { id: "experience", label: "Experience" },
     { id: "skills", label: "Skills" },
     { id: "projects", label: "Projects" },
-    { id: "education", label: "Education" },
+    { id: "about", label: "About Me" },
     { id: "contact", label: "Contact" },
   ];
 
@@ -148,18 +147,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Summary Section */}
-      <section id="summary" className="min-h-screen flex items-center px-6 py-20">
-        <div className="container max-w-4xl">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8">Summary</h2>
-          <p className="text-lg leading-relaxed text-foreground/90">
-            Results-driven Data and Systems Engineer with hands-on experience building distributed data
-            pipelines, optimizing ETL processes (10× speedup on financial workloads), and deploying scalable
-            cloud-based infrastructure. Skilled in batch/stream processing, workflow orchestration, SQL
-            performance tuning, and end-to-end data system design across on-premise and cloud environments.
-          </p>
-        </div>
-      </section>
 
       {/* Experience Section */}
       <section id="experience" className="min-h-screen flex items-center px-6 py-20">
@@ -193,6 +180,13 @@ const Index = () => {
                   Airflow, Kafka, Distributed Systems
                 </li>
               </ul>
+              <div className="mt-6 pt-6 border-t border-border">
+                <h4 className="text-sm font-semibold text-muted-foreground mb-3">Certifications</h4>
+                <div className="space-y-2 text-sm text-foreground/90">
+                  <p>• Certified Data Engineer — Karachi AI</p>
+                  <p>• AWS Educate: Cloud 101, Machine Learning Foundations</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -267,32 +261,16 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Education Section */}
-      <section id="education" className="min-h-screen flex items-center px-6 py-20">
+      {/* About Me Section */}
+      <section id="about" className="min-h-screen flex items-center px-6 py-20">
         <div className="container max-w-4xl">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-12">Education & Certifications</h2>
-          <div className="space-y-12">
-            <div>
-              <h3 className="text-base font-semibold mb-2">Education</h3>
-              <div className="border-l-2 border-border pl-6">
-                <div className="flex flex-col md:flex-row md:justify-between md:items-start">
-                  <div>
-                    <p className="font-medium">Bachelor of Computer Engineering</p>
-                    <p className="text-sm text-muted-foreground">Bahria University, Karachi</p>
-                    <p className="text-sm text-muted-foreground">CGPA: 3.15 / 4.0</p>
-                  </div>
-                  <span className="text-sm text-muted-foreground mt-1 md:mt-0">Jul 2023</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-base font-semibold mb-4">Certifications</h3>
-              <div className="space-y-2 text-sm">
-                <p className="text-foreground/90">• Certified Data Engineer — Karachi AI</p>
-                <p className="text-foreground/90">• AWS Educate: Cloud 101, Machine Learning Foundations</p>
-              </div>
-            </div>
-          </div>
+          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8">About Me</h2>
+          <p className="text-lg leading-relaxed text-foreground/90">
+            Results-driven Data and Systems Engineer with hands-on experience building distributed data
+            pipelines, optimizing ETL processes (10× speedup on financial workloads), and deploying scalable
+            cloud-based infrastructure. Skilled in batch/stream processing, workflow orchestration, SQL
+            performance tuning, and end-to-end data system design across on-premise and cloud environments.
+          </p>
         </div>
       </section>
 
