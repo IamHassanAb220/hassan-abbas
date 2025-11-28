@@ -36,23 +36,26 @@ const Index = () => {
 
   useEffect(() => {
     const currentText = titles[currentTitle];
-    
-    const timeout = setTimeout(() => {
-      if (!isDeleting && displayedText !== currentText) {
-        // Typing
-        setDisplayedText(currentText.slice(0, displayedText.length + 1));
-      } else if (!isDeleting && displayedText === currentText) {
-        // Pause before deleting
-        setTimeout(() => setIsDeleting(true), 2000);
-      } else if (isDeleting && displayedText !== "") {
-        // Deleting
-        setDisplayedText(displayedText.slice(0, -1));
-      } else if (isDeleting && displayedText === "") {
-        // Move to next title
-        setIsDeleting(false);
-        setCurrentTitle((prev) => (prev + 1) % titles.length);
-      }
-    }, isDeleting ? 50 : 100);
+
+    const timeout = setTimeout(
+      () => {
+        if (!isDeleting && displayedText !== currentText) {
+          // Typing
+          setDisplayedText(currentText.slice(0, displayedText.length + 1));
+        } else if (!isDeleting && displayedText === currentText) {
+          // Pause before deleting
+          setTimeout(() => setIsDeleting(true), 2000);
+        } else if (isDeleting && displayedText !== "") {
+          // Deleting
+          setDisplayedText(displayedText.slice(0, -1));
+        } else if (isDeleting && displayedText === "") {
+          // Move to next title
+          setIsDeleting(false);
+          setCurrentTitle((prev) => (prev + 1) % titles.length);
+        }
+      },
+      isDeleting ? 50 : 100,
+    );
 
     return () => clearTimeout(timeout);
   }, [displayedText, isDeleting, currentTitle]);
@@ -123,46 +126,32 @@ const Index = () => {
                   >
                     {item.label}
                   </button>
-                )
+                ),
               )}
             </div>
             {/* Mobile Navigation */}
-            <MobileNav 
-              navItems={navItems}
-              activeSection={activeSection}
-              onNavigate={scrollToSection}
-            />
+            <MobileNav navItems={navItems} activeSection={activeSection} onNavigate={scrollToSection} />
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 md:px-8 pt-20 overflow-hidden">
+      <section
+        id="hero"
+        className="relative min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 md:px-8 pt-20 overflow-hidden"
+      >
         {/* Floating shapes - behind content */}
-        <FloatingCircle 
-          size="300px" 
-          className="absolute top-20 left-10 animate-float opacity-10"
-        />
-        <FloatingCircle 
-          size="200px" 
-          className="absolute bottom-40 right-20 animate-float-slow opacity-[0.08]"
-        />
-        <FloatingCircle 
-          size="150px" 
-          className="absolute top-1/2 right-1/4 animate-float-reverse opacity-[0.12]"
-        />
-        <FloatingTriangle 
-          size="80px" 
-          className="absolute -top-5 -right-5 rotate-45 opacity-[0.15]"
-        />
-        <FloatingTriangle 
-          size="60px" 
-          className="absolute -bottom-3 left-10 rotate-12 opacity-10"
-        />
-        
+        <FloatingCircle size="300px" className="absolute top-20 left-10 animate-float opacity-10" />
+        <FloatingCircle size="200px" className="absolute bottom-40 right-20 animate-float-slow opacity-[0.08]" />
+        <FloatingCircle size="150px" className="absolute top-1/2 right-1/4 animate-float-reverse opacity-[0.12]" />
+        <FloatingTriangle size="80px" className="absolute -top-5 -right-5 rotate-45 opacity-[0.15]" />
+        <FloatingTriangle size="60px" className="absolute -bottom-3 left-10 rotate-12 opacity-10" />
+
         <div className="relative z-10 container max-w-4xl">
           <div className="space-y-6">
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight">Hassan Abbas</h1>
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight">
+              Hassan Abbas
+            </h1>
             <div className="h-10 sm:h-12 md:h-14 lg:h-16 flex items-center">
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground font-light">
                 {displayedText}
@@ -207,40 +196,50 @@ const Index = () => {
         </div>
       </section>
 
-
       {/* Experience Section */}
-      <section id="experience" className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-[#111] overflow-hidden">
+      <section
+        id="experience"
+        className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-[#111] overflow-hidden"
+      >
         {/* Subtle corner shapes */}
         <FloatingTriangle size="40px" className="absolute top-10 right-10 opacity-10 animate-float-slow" />
         <FloatingCircle size="60px" className="absolute bottom-20 left-5 opacity-[0.08] animate-float" />
-        
+
         <div className="container max-w-4xl" ref={experienceAnimation.ref}>
-          <h2 className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
-            experienceAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>Experience</h2>
-          <div className={`space-y-12 transition-all duration-700 delay-100 ${
-            experienceAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
+          <h2
+            className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
+              experienceAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+          >
+            Experience
+          </h2>
+          <div
+            className={`space-y-12 transition-all duration-700 delay-100 ${
+              experienceAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+          >
             <div className="border-l-2 border-border pl-4 sm:pl-6">
               <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                 <div>
                   <h3 className="text-lg sm:text-xl font-semibold">Software Design Engineer</h3>
                   <p className="text-sm sm:text-base text-muted-foreground">TeReSol Pvt. Ltd., Karachi</p>
                 </div>
-                <span className="text-xs sm:text-sm text-muted-foreground mt-1 md:mt-0 whitespace-nowrap">Nov 2023 – Present</span>
+                <span className="text-xs sm:text-sm text-muted-foreground mt-1 md:mt-0 whitespace-nowrap">
+                  Nov 2023 – Present
+                </span>
               </div>
               <ul className="space-y-3 text-sm leading-relaxed text-foreground/90">
                 <li>
-                  • Developed microservice-based data services in Quarkus and Flask, integrating multiple
-                  banking APIs and orchestrating financial data flows.
+                  • Developed microservice-based data services in Quarkus and Flask, integrating multiple banking APIs
+                  and orchestrating financial data flows.
                 </li>
                 <li>
-                  • Improved IFRS 9 data ingestion performance by 10× (4 hours → 30 minutes) using JSON
-                  TABLE, multi-threading, and optimized SQL pipelines.
+                  • Improved IFRS 9 data ingestion performance by 10× (4 hours → 30 minutes) using JSON TABLE,
+                  multi-threading, and optimized SQL pipelines.
                 </li>
                 <li>
-                  • Engineered multi-step CTE-based SQL transformations for ECL and financial risk
-                  calculations across datasets of 100k+ records.
+                  • Engineered multi-step CTE-based SQL transformations for ECL and financial risk calculations across
+                  datasets of 100k+ records.
                 </li>
                 <li>• Built Dockerized environments enabling reproducible development, testing, and deployment.</li>
                 <li>
@@ -261,20 +260,27 @@ const Index = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-black overflow-hidden">
+      <section
+        id="skills"
+        className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-black overflow-hidden"
+      >
         <FloatingTriangle size="30px" className="absolute top-20 right-16 opacity-[0.12] animate-float" />
         <FloatingCircle size="40px" className="absolute bottom-32 left-10 opacity-10 animate-float-slow" />
-        
+
         <div className="container max-w-4xl" ref={skillsAnimation.ref}>
-          <h2 className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
-            skillsAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>Core Skills & Competencies</h2>
+          <h2
+            className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
+              skillsAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+          >
+            Core Skills & Competencies
+          </h2>
           <div className="grid md:grid-cols-2 gap-8">
             {Object.entries(skills).map(([category, items], index) => (
-              <div 
-                key={category} 
+              <div
+                key={category}
                 className={`space-y-3 transition-all duration-700 ${
-                  skillsAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  skillsAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
@@ -296,20 +302,27 @@ const Index = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-black overflow-hidden">
+      <section
+        id="projects"
+        className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-black overflow-hidden"
+      >
         <FloatingTriangle size="35px" className="absolute top-16 left-12 opacity-10 animate-float-reverse" />
         <FloatingCircle size="50px" className="absolute bottom-24 right-8 opacity-[0.08] animate-float" />
-        
+
         <div className="container max-w-4xl" ref={projectsAnimation.ref}>
-          <h2 className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
-            projectsAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>Selected Projects</h2>
+          <h2
+            className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
+              projectsAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+          >
+            Selected Projects
+          </h2>
           <div className="space-y-8 sm:space-y-12">
             {projects.map((project, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`group relative border border-border p-4 sm:p-5 md:p-6 rounded-sm bg-card transition-all duration-700 hover:scale-[1.02] hover:border-foreground/30 ${
-                  projectsAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  projectsAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
@@ -328,10 +341,7 @@ const Index = () => {
                 <p className="text-sm leading-relaxed text-foreground/90 mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded"
-                    >
+                    <span key={tech} className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded">
                       {tech}
                     </span>
                   ))}
@@ -343,48 +353,72 @@ const Index = () => {
       </section>
 
       {/* About Me Section */}
-      <section id="about" className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-black overflow-hidden">
+      <section
+        id="about"
+        className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-black overflow-hidden"
+      >
         {/* Large background shapes for depth */}
         <FloatingCircle size="400px" className="absolute -top-32 -right-32 opacity-[0.05] animate-float-slow" />
         <FloatingCircle size="300px" className="absolute -bottom-24 -left-24 opacity-[0.06] animate-float" />
-        <FloatingTriangle size="100px" className="absolute top-1/2 right-1/4 opacity-[0.08] rotate-12 animate-float-reverse" />
-        
+        <FloatingTriangle
+          size="100px"
+          className="absolute top-1/2 right-1/4 opacity-[0.08] rotate-12 animate-float-reverse"
+        />
+
         <div className="relative z-10 container max-w-4xl" ref={aboutAnimation.ref}>
-          <h2 className={`text-sm uppercase tracking-widest text-muted-foreground mb-6 sm:mb-8 transition-all duration-700 ${
-            aboutAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>About Me</h2>
-          <p className={`text-base sm:text-lg leading-relaxed text-foreground/90 transition-all duration-700 delay-100 ${
-            aboutAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
-            Results-driven Data and Systems Engineer with hands-on experience building distributed data
-            pipelines, optimizing ETL processes (10× speedup on financial workloads), and deploying scalable
-            cloud-based infrastructure. Skilled in batch/stream processing, workflow orchestration, SQL
-            performance tuning, and end-to-end data system design across on-premise and cloud environments.
+          <h2
+            className={`text-sm uppercase tracking-widest text-muted-foreground mb-6 sm:mb-8 transition-all duration-700 ${
+              aboutAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+          >
+            About Me
+          </h2>
+          <p
+            className={`text-base sm:text-lg leading-relaxed text-foreground/90 transition-all duration-700 delay-100 ${
+              aboutAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+          >
+            Results-driven Data and Systems Engineer with hands-on experience building distributed data pipelines,
+            optimizing ETL processes (10× speedup on financial workloads), and deploying scalable cloud-based
+            infrastructure. Skilled in batch/stream processing, workflow orchestration, SQL performance tuning, and
+            end-to-end data system design across on-premise and cloud environments.
           </p>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-black overflow-hidden">
+      <section
+        id="contact"
+        className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-black overflow-hidden"
+      >
         {/* Large background shapes for depth */}
         <FloatingCircle size="350px" className="absolute top-16 left-16 opacity-[0.06] animate-float" />
-        <FloatingTriangle size="120px" className="absolute bottom-20 right-20 opacity-10 rotate-45 animate-float-slow" />
+        <FloatingTriangle
+          size="120px"
+          className="absolute bottom-20 right-20 opacity-10 rotate-45 animate-float-slow"
+        />
         <FloatingCircle size="200px" className="absolute bottom-32 left-1/3 opacity-[0.05] animate-float-reverse" />
-        
+
         <div className="relative z-10 container max-w-4xl" ref={contactAnimation.ref}>
-          <h2 className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
-            contactAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>Contact</h2>
-          <div className={`space-y-6 transition-all duration-700 delay-100 ${
-            contactAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
+          <h2
+            className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
+              contactAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+          >
+            Contact
+          </h2>
+          <div
+            className={`space-y-6 transition-all duration-700 delay-100 ${
+              contactAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+          >
             <div>
               <p className="text-sm text-muted-foreground mb-2">Email</p>
               <a
-                href="mailto:hassanab220.work@gmail.com"
+                href="mailto:hello@hassanab.com"
                 className="text-base sm:text-lg hover:text-muted-foreground transition-colors break-all"
               >
-                hassanab220.work@gmail.com
+                hello@hassanab.com
               </a>
             </div>
             <div>
