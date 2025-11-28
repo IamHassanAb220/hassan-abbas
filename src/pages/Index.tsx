@@ -4,6 +4,8 @@ import { ExternalLink, Github, Linkedin, Mail, FileText } from "lucide-react";
 const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
   const [currentTitle, setCurrentTitle] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
   const titles = ["Data Engineer", "Software Engineer AI/ML"];
 
   useEffect(() => {
@@ -28,11 +30,31 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTitle((prev) => (prev + 1) % titles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+    const currentText = titles[currentTitle];
+    let charIndex = 0;
+
+    if (isTyping) {
+      const typingInterval = setInterval(() => {
+        if (charIndex <= currentText.length) {
+          setDisplayedText(currentText.slice(0, charIndex));
+          charIndex++;
+        } else {
+          setIsTyping(false);
+          clearInterval(typingInterval);
+        }
+      }, 100);
+
+      return () => clearInterval(typingInterval);
+    } else {
+      const pauseTimeout = setTimeout(() => {
+        setDisplayedText("");
+        setCurrentTitle((prev) => (prev + 1) % titles.length);
+        setIsTyping(true);
+      }, 2000);
+
+      return () => clearTimeout(pauseTimeout);
+    }
+  }, [currentTitle, isTyping]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -125,11 +147,9 @@ const Index = () => {
           <div className="space-y-6">
             <h1 className="text-6xl md:text-8xl font-bold tracking-tight">Hassan Abbas</h1>
             <div className="h-12 md:h-16 flex items-center">
-              <p
-                key={currentTitle}
-                className="text-2xl md:text-3xl text-muted-foreground font-light animate-fade-in"
-              >
-                {titles[currentTitle]}
+              <p className="text-2xl md:text-3xl text-muted-foreground font-light">
+                {displayedText}
+                <span className="animate-pulse">|</span>
               </p>
             </div>
             <div className="flex gap-6 pt-4">
