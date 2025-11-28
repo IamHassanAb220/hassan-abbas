@@ -5,7 +5,7 @@ const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
   const [currentTitle, setCurrentTitle] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
   const titles = ["Data Engineer", "Software Engineer AI/ML"];
 
   useEffect(() => {
@@ -31,30 +31,26 @@ const Index = () => {
 
   useEffect(() => {
     const currentText = titles[currentTitle];
-    let charIndex = 0;
-
-    if (isTyping) {
-      const typingInterval = setInterval(() => {
-        if (charIndex <= currentText.length) {
-          setDisplayedText(currentText.slice(0, charIndex));
-          charIndex++;
-        } else {
-          setIsTyping(false);
-          clearInterval(typingInterval);
-        }
-      }, 100);
-
-      return () => clearInterval(typingInterval);
-    } else {
-      const pauseTimeout = setTimeout(() => {
-        setDisplayedText("");
+    
+    const timeout = setTimeout(() => {
+      if (!isDeleting && displayedText !== currentText) {
+        // Typing
+        setDisplayedText(currentText.slice(0, displayedText.length + 1));
+      } else if (!isDeleting && displayedText === currentText) {
+        // Pause before deleting
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && displayedText !== "") {
+        // Deleting
+        setDisplayedText(displayedText.slice(0, -1));
+      } else if (isDeleting && displayedText === "") {
+        // Move to next title
+        setIsDeleting(false);
         setCurrentTitle((prev) => (prev + 1) % titles.length);
-        setIsTyping(true);
-      }, 2000);
+      }
+    }, isDeleting ? 50 : 100);
 
-      return () => clearTimeout(pauseTimeout);
-    }
-  }, [currentTitle, isTyping]);
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, currentTitle]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
