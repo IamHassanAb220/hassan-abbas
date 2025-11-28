@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Linkedin, Mail, FileText, ArrowRight, Link as LinkIcon } from "lucide-react";
 import { projects } from "@/data/projects";
 import { MobileNav } from "@/components/MobileNav";
+import { FloatingCircle, FloatingTriangle } from "@/components/FloatingShapes";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
@@ -61,6 +63,13 @@ const Index = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  // Scroll animations for sections
+  const experienceAnimation = useScrollAnimation(0.1);
+  const skillsAnimation = useScrollAnimation(0.1);
+  const projectsAnimation = useScrollAnimation(0.1);
+  const aboutAnimation = useScrollAnimation(0.1);
+  const contactAnimation = useScrollAnimation(0.1);
 
   const navItems = [
     { id: "hero", label: "Home" },
@@ -128,8 +137,30 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 pt-20">
-        <div className="container max-w-4xl">
+      <section id="hero" className="relative min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 md:px-8 pt-20 overflow-hidden">
+        {/* Floating shapes - behind content */}
+        <FloatingCircle 
+          size="300px" 
+          className="absolute top-20 left-10 animate-float opacity-10"
+        />
+        <FloatingCircle 
+          size="200px" 
+          className="absolute bottom-40 right-20 animate-float-slow opacity-[0.08]"
+        />
+        <FloatingCircle 
+          size="150px" 
+          className="absolute top-1/2 right-1/4 animate-float-reverse opacity-[0.12]"
+        />
+        <FloatingTriangle 
+          size="80px" 
+          className="absolute -top-5 -right-5 rotate-45 opacity-[0.15]"
+        />
+        <FloatingTriangle 
+          size="60px" 
+          className="absolute -bottom-3 left-10 rotate-12 opacity-10"
+        />
+        
+        <div className="relative z-10 container max-w-4xl">
           <div className="space-y-6">
             <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight">Hassan Abbas</h1>
             <div className="h-10 sm:h-12 md:h-14 lg:h-16 flex items-center">
@@ -178,10 +209,18 @@ const Index = () => {
 
 
       {/* Experience Section */}
-      <section id="experience" className="min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20">
-        <div className="container max-w-4xl">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12">Experience</h2>
-          <div className="space-y-12">
+      <section id="experience" className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-[#111] overflow-hidden">
+        {/* Subtle corner shapes */}
+        <FloatingTriangle size="40px" className="absolute top-10 right-10 opacity-10 animate-float-slow" />
+        <FloatingCircle size="60px" className="absolute bottom-20 left-5 opacity-[0.08] animate-float" />
+        
+        <div className="container max-w-4xl" ref={experienceAnimation.ref}>
+          <h2 className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
+            experienceAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>Experience</h2>
+          <div className={`space-y-12 transition-all duration-700 delay-100 ${
+            experienceAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
             <div className="border-l-2 border-border pl-4 sm:pl-6">
               <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                 <div>
@@ -222,12 +261,23 @@ const Index = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20">
-        <div className="container max-w-4xl">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12">Core Skills & Competencies</h2>
+      <section id="skills" className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-black overflow-hidden">
+        <FloatingTriangle size="30px" className="absolute top-20 right-16 opacity-[0.12] animate-float" />
+        <FloatingCircle size="40px" className="absolute bottom-32 left-10 opacity-10 animate-float-slow" />
+        
+        <div className="container max-w-4xl" ref={skillsAnimation.ref}>
+          <h2 className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
+            skillsAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>Core Skills & Competencies</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            {Object.entries(skills).map(([category, items]) => (
-              <div key={category} className="space-y-3">
+            {Object.entries(skills).map(([category, items], index) => (
+              <div 
+                key={category} 
+                className={`space-y-3 transition-all duration-700 ${
+                  skillsAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
                 <h3 className="text-base font-semibold text-foreground">{category}</h3>
                 <div className="flex flex-wrap gap-2">
                   {items.map((skill) => (
@@ -246,12 +296,25 @@ const Index = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20">
-        <div className="container max-w-4xl">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12">Selected Projects</h2>
+      <section id="projects" className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-black overflow-hidden">
+        <FloatingTriangle size="35px" className="absolute top-16 left-12 opacity-10 animate-float-reverse" />
+        <FloatingCircle size="50px" className="absolute bottom-24 right-8 opacity-[0.08] animate-float" />
+        
+        <div className="container max-w-4xl" ref={projectsAnimation.ref}>
+          <h2 className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
+            projectsAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>Selected Projects</h2>
           <div className="space-y-8 sm:space-y-12">
             {projects.map((project, index) => (
-              <div key={index} className="border border-border p-4 sm:p-5 md:p-6 rounded-sm bg-card">
+              <div 
+                key={index} 
+                className={`group relative border border-border p-4 sm:p-5 md:p-6 rounded-sm bg-card transition-all duration-700 hover:scale-[1.02] hover:border-foreground/30 ${
+                  projectsAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                {/* Accent shape that moves on hover */}
+                <div className="absolute -top-2 -right-2 w-4 h-4 border border-white/20 rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2">
                   <h3 className="text-base sm:text-lg font-semibold">{project.title}</h3>
                   <Link
@@ -280,10 +343,19 @@ const Index = () => {
       </section>
 
       {/* About Me Section */}
-      <section id="about" className="min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20">
-        <div className="container max-w-4xl">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-6 sm:mb-8">About Me</h2>
-          <p className="text-base sm:text-lg leading-relaxed text-foreground/90">
+      <section id="about" className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-black overflow-hidden">
+        {/* Large background shapes for depth */}
+        <FloatingCircle size="400px" className="absolute -top-32 -right-32 opacity-[0.05] animate-float-slow" />
+        <FloatingCircle size="300px" className="absolute -bottom-24 -left-24 opacity-[0.06] animate-float" />
+        <FloatingTriangle size="100px" className="absolute top-1/2 right-1/4 opacity-[0.08] rotate-12 animate-float-reverse" />
+        
+        <div className="relative z-10 container max-w-4xl" ref={aboutAnimation.ref}>
+          <h2 className={`text-sm uppercase tracking-widest text-muted-foreground mb-6 sm:mb-8 transition-all duration-700 ${
+            aboutAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>About Me</h2>
+          <p className={`text-base sm:text-lg leading-relaxed text-foreground/90 transition-all duration-700 delay-100 ${
+            aboutAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
             Results-driven Data and Systems Engineer with hands-on experience building distributed data
             pipelines, optimizing ETL processes (10× speedup on financial workloads), and deploying scalable
             cloud-based infrastructure. Skilled in batch/stream processing, workflow orchestration, SQL
@@ -293,10 +365,19 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20">
-        <div className="container max-w-4xl">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12">Contact</h2>
-          <div className="space-y-6">
+      <section id="contact" className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20 bg-black overflow-hidden">
+        {/* Large background shapes for depth */}
+        <FloatingCircle size="350px" className="absolute top-16 left-16 opacity-[0.06] animate-float" />
+        <FloatingTriangle size="120px" className="absolute bottom-20 right-20 opacity-10 rotate-45 animate-float-slow" />
+        <FloatingCircle size="200px" className="absolute bottom-32 left-1/3 opacity-[0.05] animate-float-reverse" />
+        
+        <div className="relative z-10 container max-w-4xl" ref={contactAnimation.ref}>
+          <h2 className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
+            contactAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>Contact</h2>
+          <div className={`space-y-6 transition-all duration-700 delay-100 ${
+            contactAnimation.isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
             <div>
               <p className="text-sm text-muted-foreground mb-2">Email</p>
               <a
