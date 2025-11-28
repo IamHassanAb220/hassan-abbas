@@ -3,6 +3,8 @@ import { ExternalLink, Github, Linkedin, Mail, FileText } from "lucide-react";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
+  const [currentTitle, setCurrentTitle] = useState(0);
+  const titles = ["Data Engineer", "Software Engineer AI/ML"];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +25,13 @@ const Index = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTitle((prev) => (prev + 1) % titles.length);
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -115,7 +124,14 @@ const Index = () => {
         <div className="container max-w-4xl">
           <div className="space-y-6">
             <h1 className="text-6xl md:text-8xl font-bold tracking-tight">Hassan Abbas</h1>
-            <p className="text-2xl md:text-3xl text-muted-foreground font-light">Data Engineer</p>
+            <div className="h-12 md:h-16 flex items-center">
+              <p
+                key={currentTitle}
+                className="text-2xl md:text-3xl text-muted-foreground font-light animate-fade-in"
+              >
+                {titles[currentTitle]}
+              </p>
+            </div>
             <div className="flex gap-6 pt-4">
               <a
                 href="mailto:hassanab220.work@gmail.com"
