@@ -55,3 +55,19 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
 }
+
+@layer utilities {
+  /* Touch-friendly tap targets for mobile/tablet */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Ensure touch targets are accessible on touch devices */
+  @media (pointer: coarse) {
+    .touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+}
