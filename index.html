@@ -21,6 +21,16 @@
   </head>
 
   <body>
+    <script>
+      // Handle GitHub Pages redirect from 404.html
+      (function() {
+        var redirectPath = sessionStorage.getItem('redirectPath');
+        if (redirectPath) {
+          sessionStorage.removeItem('redirectPath');
+          history.replaceState(null, '', redirectPath);
+        }
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
