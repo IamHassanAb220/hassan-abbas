@@ -43,32 +43,32 @@ const Resources = () => {
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
       <header className="border-b border-border">
-        <div className="container max-w-2xl mx-auto px-6 py-8">
+        <div className="container max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <Link 
             to="/" 
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4 sm:mb-6 touch-target"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Portfolio
           </Link>
-          <h1 className="text-4xl font-bold tracking-tight">Hassan Abbas</h1>
-          <p className="text-muted-foreground mt-2">Resources & Links</p>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Hassan Abbas</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mt-2">Resources & Links</p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="container max-w-2xl mx-auto px-6 py-12">
+      <main className="container max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Projects Section */}
-        <section className="mb-16">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-6">Projects</h2>
+        <section className="mb-12 sm:mb-16">
+          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-4 sm:mb-6">Projects</h2>
           <div className="space-y-4">
             {projects.map((project) => (
               <div
                 key={project.slug}
                 id={project.slug}
-                className="border border-border bg-card rounded-sm p-6 transition-all duration-200 hover:border-foreground/40 hover:bg-muted/20"
+                className="border border-border bg-card rounded-sm p-4 sm:p-5 md:p-6 transition-all duration-200 hover:border-foreground/40 hover:bg-muted/20"
               >
-                <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">{project.title}</h3>
                 <p className="text-sm text-foreground/90 leading-relaxed mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech) => (
@@ -87,13 +87,13 @@ const Resources = () => {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 border border-border rounded-sm bg-background hover:border-foreground/40 hover:bg-muted/20 transition-all duration-200 group"
+                      className="flex items-center justify-between p-3 border border-border rounded-sm bg-background hover:border-foreground/40 hover:bg-muted/20 transition-all duration-200 group touch-target"
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                         {getLinkIcon(link.type)}
-                        <span className="text-sm">{link.label}</span>
+                        <span className="text-xs sm:text-sm truncate">{link.label}</span>
                       </div>
-                      <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-foreground transition-colors" />
+                      <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0" />
                     </a>
                   ))}
                 </div>
@@ -103,83 +103,83 @@ const Resources = () => {
         </section>
 
         {/* Social & Professional Section */}
-        <section className="mb-16">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-6">Social & Professional</h2>
+        <section className="mb-12 sm:mb-16">
+          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-4 sm:mb-6">Social & Professional</h2>
           <div className="space-y-2">
             <a
               href="mailto:hassanab220.work@gmail.com"
-              className="flex items-center justify-between p-4 border border-border rounded-sm bg-card hover:border-foreground/40 hover:bg-muted/20 transition-all duration-200 group"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 border border-border rounded-sm bg-card hover:border-foreground/40 hover:bg-muted/20 transition-all duration-200 group touch-target gap-2"
             >
               <div className="flex items-center gap-3">
-                <Mail className="w-4 h-4" />
+                <Mail className="w-4 h-4 flex-shrink-0" />
                 <span className="text-sm">Email</span>
               </div>
-              <span className="text-xs text-muted-foreground">hassanab220.work@gmail.com</span>
+              <span className="text-xs text-muted-foreground break-all sm:text-right">hassanab220.work@gmail.com</span>
             </a>
             <a
               href="https://linkedin.com/in/hassan-abbas-848549209"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between p-4 border border-border rounded-sm bg-card hover:border-foreground/40 hover:bg-muted/20 transition-all duration-200 group"
+              className="flex items-center justify-between p-3 sm:p-4 border border-border rounded-sm bg-card hover:border-foreground/40 hover:bg-muted/20 transition-all duration-200 group touch-target"
             >
               <div className="flex items-center gap-3">
-                <Linkedin className="w-4 h-4" />
+                <Linkedin className="w-4 h-4 flex-shrink-0" />
                 <span className="text-sm">LinkedIn</span>
               </div>
-              <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0" />
             </a>
             <a
               href="https://github.com/hassanabbas16"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between p-4 border border-border rounded-sm bg-card hover:border-foreground/40 hover:bg-muted/20 transition-all duration-200 group"
+              className="flex items-center justify-between p-3 sm:p-4 border border-border rounded-sm bg-card hover:border-foreground/40 hover:bg-muted/20 transition-all duration-200 group touch-target"
             >
               <div className="flex items-center gap-3">
-                <Github className="w-4 h-4" />
+                <Github className="w-4 h-4 flex-shrink-0" />
                 <span className="text-sm">GitHub Profile</span>
               </div>
-              <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0" />
             </a>
             <a
               href="https://medium.com/@hassanabbasg220"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between p-4 border border-border rounded-sm bg-card hover:border-foreground/40 hover:bg-muted/20 transition-all duration-200 group"
+              className="flex items-center justify-between p-3 sm:p-4 border border-border rounded-sm bg-card hover:border-foreground/40 hover:bg-muted/20 transition-all duration-200 group touch-target"
             >
               <div className="flex items-center gap-3">
-                <FileText className="w-4 h-4" />
+                <FileText className="w-4 h-4 flex-shrink-0" />
                 <span className="text-sm">Medium Blog</span>
               </div>
-              <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0" />
             </a>
           </div>
         </section>
 
         {/* Certifications Section */}
         <section>
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-6">Certifications</h2>
+          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-4 sm:mb-6">Certifications</h2>
           <div className="space-y-2">
-            <div className="p-4 border border-border rounded-sm bg-card">
+            <div className="p-3 sm:p-4 border border-border rounded-sm bg-card">
               <div className="flex items-start gap-3">
-                <FileCode className="w-4 h-4 mt-1" />
+                <FileCode className="w-4 h-4 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-sm font-medium">Certified Data Engineer</p>
                   <p className="text-xs text-muted-foreground">Karachi AI</p>
                 </div>
               </div>
             </div>
-            <div className="p-4 border border-border rounded-sm bg-card">
+            <div className="p-3 sm:p-4 border border-border rounded-sm bg-card">
               <div className="flex items-start gap-3">
-                <FileCode className="w-4 h-4 mt-1" />
+                <FileCode className="w-4 h-4 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-sm font-medium">AWS Educate: Cloud 101</p>
                   <p className="text-xs text-muted-foreground">Amazon Web Services</p>
                 </div>
               </div>
             </div>
-            <div className="p-4 border border-border rounded-sm bg-card">
+            <div className="p-3 sm:p-4 border border-border rounded-sm bg-card">
               <div className="flex items-start gap-3">
-                <FileCode className="w-4 h-4 mt-1" />
+                <FileCode className="w-4 h-4 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-sm font-medium">AWS Educate: Machine Learning Foundations</p>
                   <p className="text-xs text-muted-foreground">Amazon Web Services</p>
@@ -191,8 +191,8 @@ const Resources = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border py-8 mt-16">
-        <div className="container max-w-2xl mx-auto px-6">
+      <footer className="border-t border-border py-6 sm:py-8 mt-12 sm:mt-16">
+        <div className="container max-w-2xl mx-auto px-4 sm:px-6">
           <p className="text-xs text-muted-foreground text-center">
             © {new Date().getFullYear()} Hassan Abbas. All rights reserved.
           </p>

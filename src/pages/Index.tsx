@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Linkedin, Mail, FileText, ArrowRight, Link as LinkIcon } from "lucide-react";
 import { projects } from "@/data/projects";
+import { MobileNav } from "@/components/MobileNav";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
@@ -82,7 +83,7 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       {/* Fixed Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
             <button
               onClick={() => scrollToSection("hero")}
@@ -90,7 +91,8 @@ const Index = () => {
             >
               Hassan Abbas
             </button>
-            <div className="flex gap-6">
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex gap-6">
               {navItems.map((item) =>
                 item.isExternal ? (
                   <Link
@@ -115,53 +117,59 @@ const Index = () => {
                 )
               )}
             </div>
+            {/* Mobile Navigation */}
+            <MobileNav 
+              navItems={navItems}
+              activeSection={activeSection}
+              onNavigate={scrollToSection}
+            />
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-20">
+      <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 pt-20">
         <div className="container max-w-4xl">
           <div className="space-y-6">
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tight">Hassan Abbas</h1>
-            <div className="h-12 md:h-16 flex items-center">
-              <p className="text-2xl md:text-3xl text-muted-foreground font-light">
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight">Hassan Abbas</h1>
+            <div className="h-10 sm:h-12 md:h-14 lg:h-16 flex items-center">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground font-light">
                 {displayedText}
                 <span className="animate-pulse">|</span>
               </p>
             </div>
-            <div className="flex gap-6 pt-4">
+            <div className="flex flex-wrap gap-3 sm:gap-4 md:gap-6 pt-4">
               <a
                 href="mailto:hassanab220.work@gmail.com"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 touch-target"
               >
                 <Mail className="w-4 h-4" />
-                Email
+                <span className="hidden xs:inline">Email</span>
               </a>
               <a
                 href="https://linkedin.com/in/hassan-abbas-848549209"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 touch-target"
               >
                 <Linkedin className="w-4 h-4" />
-                LinkedIn
+                <span className="hidden xs:inline">LinkedIn</span>
               </a>
               <a
                 href="https://medium.com/@hassanabbasg220"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 touch-target"
               >
                 <FileText className="w-4 h-4" />
-                Medium
+                <span className="hidden xs:inline">Medium</span>
               </a>
               <Link
                 to="/resources"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 touch-target"
               >
                 <LinkIcon className="w-4 h-4" />
-                Resources
+                <span className="hidden xs:inline">Resources</span>
               </Link>
             </div>
           </div>
@@ -170,17 +178,17 @@ const Index = () => {
 
 
       {/* Experience Section */}
-      <section id="experience" className="min-h-screen flex items-center px-6 py-20">
+      <section id="experience" className="min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20">
         <div className="container max-w-4xl">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-12">Experience</h2>
+          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12">Experience</h2>
           <div className="space-y-12">
-            <div className="border-l-2 border-border pl-6">
+            <div className="border-l-2 border-border pl-4 sm:pl-6">
               <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-semibold">Software Design Engineer</h3>
-                  <p className="text-muted-foreground">TeReSol Pvt. Ltd., Karachi</p>
+                  <h3 className="text-lg sm:text-xl font-semibold">Software Design Engineer</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">TeReSol Pvt. Ltd., Karachi</p>
                 </div>
-                <span className="text-sm text-muted-foreground mt-1 md:mt-0">Nov 2023 – Present</span>
+                <span className="text-xs sm:text-sm text-muted-foreground mt-1 md:mt-0 whitespace-nowrap">Nov 2023 – Present</span>
               </div>
               <ul className="space-y-3 text-sm leading-relaxed text-foreground/90">
                 <li>
@@ -214,9 +222,9 @@ const Index = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="min-h-screen flex items-center px-6 py-20">
+      <section id="skills" className="min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20">
         <div className="container max-w-4xl">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-12">Core Skills & Competencies</h2>
+          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12">Core Skills & Competencies</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {Object.entries(skills).map(([category, items]) => (
               <div key={category} className="space-y-3">
@@ -238,17 +246,17 @@ const Index = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="min-h-screen flex items-center px-6 py-20">
+      <section id="projects" className="min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20">
         <div className="container max-w-4xl">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-12">Selected Projects</h2>
-          <div className="space-y-12">
+          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12">Selected Projects</h2>
+          <div className="space-y-8 sm:space-y-12">
             {projects.map((project, index) => (
-              <div key={index} className="border border-border p-6 rounded-sm bg-card">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-lg font-semibold">{project.title}</h3>
+              <div key={index} className="border border-border p-4 sm:p-5 md:p-6 rounded-sm bg-card">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2">
+                  <h3 className="text-base sm:text-lg font-semibold">{project.title}</h3>
                   <Link
                     to={`/resources#${project.slug}`}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5"
+                    className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5 whitespace-nowrap touch-target"
                   >
                     View Links
                     <ArrowRight className="w-3 h-3" />
@@ -272,10 +280,10 @@ const Index = () => {
       </section>
 
       {/* About Me Section */}
-      <section id="about" className="min-h-screen flex items-center px-6 py-20">
+      <section id="about" className="min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20">
         <div className="container max-w-4xl">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8">About Me</h2>
-          <p className="text-lg leading-relaxed text-foreground/90">
+          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-6 sm:mb-8">About Me</h2>
+          <p className="text-base sm:text-lg leading-relaxed text-foreground/90">
             Results-driven Data and Systems Engineer with hands-on experience building distributed data
             pipelines, optimizing ETL processes (10× speedup on financial workloads), and deploying scalable
             cloud-based infrastructure. Skilled in batch/stream processing, workflow orchestration, SQL
@@ -285,50 +293,52 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="min-h-screen flex items-center px-6 py-20">
+      <section id="contact" className="min-h-screen flex items-center px-4 sm:px-6 md:px-8 py-20">
         <div className="container max-w-4xl">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-12">Contact</h2>
+          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12">Contact</h2>
           <div className="space-y-6">
             <div>
               <p className="text-sm text-muted-foreground mb-2">Email</p>
               <a
                 href="mailto:hassanab220.work@gmail.com"
-                className="text-lg hover:text-muted-foreground transition-colors"
+                className="text-base sm:text-lg hover:text-muted-foreground transition-colors break-all"
               >
                 hassanab220.work@gmail.com
               </a>
             </div>
             <div>
               <p className="text-sm text-muted-foreground mb-2">Location</p>
-              <p className="text-lg">Karachi, Pakistan</p>
+              <p className="text-base sm:text-lg">Karachi, Pakistan</p>
               <p className="text-sm text-muted-foreground">+92 312 2215921</p>
             </div>
             <div>
               <p className="text-sm text-muted-foreground mb-2">Links</p>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-3">
                 <a
                   href="https://linkedin.com/in/hassan-abbas-848549209"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-base hover:text-muted-foreground transition-colors flex items-center gap-2"
+                  className="text-sm sm:text-base hover:text-muted-foreground transition-colors flex items-center gap-2 touch-target break-all"
                 >
-                  <Linkedin className="w-4 h-4" />
-                  linkedin.com/in/hassan-abbas-848549209
+                  <Linkedin className="w-4 h-4 flex-shrink-0" />
+                  <span className="hidden sm:inline">linkedin.com/in/hassan-abbas-848549209</span>
+                  <span className="sm:hidden">LinkedIn Profile</span>
                 </a>
                 <a
                   href="https://medium.com/@hassanabbasg220"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-base hover:text-muted-foreground transition-colors flex items-center gap-2"
+                  className="text-sm sm:text-base hover:text-muted-foreground transition-colors flex items-center gap-2 touch-target break-all"
                 >
-                  <FileText className="w-4 h-4" />
-                  medium.com/@hassanabbasg220
+                  <FileText className="w-4 h-4 flex-shrink-0" />
+                  <span className="hidden sm:inline">medium.com/@hassanabbasg220</span>
+                  <span className="sm:hidden">Medium Blog</span>
                 </a>
                 <Link
                   to="/resources"
-                  className="text-base hover:text-muted-foreground transition-colors flex items-center gap-2"
+                  className="text-sm sm:text-base hover:text-muted-foreground transition-colors flex items-center gap-2 touch-target"
                 >
-                  <LinkIcon className="w-4 h-4" />
+                  <LinkIcon className="w-4 h-4 flex-shrink-0" />
                   All Resources & Links
                 </Link>
               </div>
@@ -339,7 +349,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="border-t border-border py-8">
-        <div className="container max-w-4xl px-6">
+        <div className="container max-w-4xl px-4 sm:px-6 md:px-8">
           <p className="text-xs text-muted-foreground text-center">
             © {new Date().getFullYear()} Hassan Abbas. All rights reserved.
           </p>
