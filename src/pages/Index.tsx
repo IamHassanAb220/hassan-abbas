@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { ExternalLink, Github, Linkedin, Mail, FileText } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Linkedin, Mail, FileText, ArrowRight, Link as LinkIcon } from "lucide-react";
+import { projects } from "@/data/projects";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
@@ -66,37 +68,7 @@ const Index = () => {
     { id: "projects", label: "Projects" },
     { id: "about", label: "About Me" },
     { id: "contact", label: "Contact" },
-  ];
-
-  const projects = [
-    {
-      title: "On-Prem ETL & Data Warehousing",
-      description: "Orchestrated automated ETL workflows with Apache Airflow for data acquisition, transformation, and loading. Engineered Kimball-style dimensional data warehouse with star schema, transforming OLTP records into optimized OLAP structures.",
-      tech: ["Apache Airflow", "MySQL", "Python", "Star Schema"],
-      github: "#", // Replace with actual GitHub link
-      demo: "#",  // Replace with actual demo link
-    },
-    {
-      title: "Cloud ETL & Distributed Processing",
-      description: "Built serverless ETL pipelines on AWS using Lambda and Glue with S3-triggered event-driven architecture. Processed 300k+ records using PySpark across multiple cloud platforms (GCP Dataflow/Dataproc, Databricks).",
-      tech: ["AWS Glue", "Lambda", "S3", "PySpark", "GCP", "Databricks"],
-      github: "#",
-      demo: "#",
-    },
-    {
-      title: "Real-Time Streaming Platform",
-      description: "Developed end-to-end real-time data pipeline with custom Kafka producers and consumers. Architected low-latency Streamlit dashboard for monitoring message flow, throughput, and system performance.",
-      tech: ["Apache Kafka", "Python", "Streamlit", "Event-Driven Architecture"],
-      github: "#",
-      demo: "#",
-    },
-    {
-      title: "AI Data Systems & RAG Pipeline",
-      description: "Engineered RAG-based AI query system using FAISS vector retrieval and LangChain orchestration. Implemented multi-layer caching with Redis for both chat memory and vector storage. Containerized application using Docker.",
-      tech: ["LangChain", "FAISS", "Docker", "Redis", "OpenAI", "GROQ"],
-      github: "#",
-      demo: "#",
-    },
+    { id: "resources", label: "Resources", isExternal: true },
   ];
 
   const skills = {
@@ -119,19 +91,29 @@ const Index = () => {
               Hassan Abbas
             </button>
             <div className="flex gap-6">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`text-xs tracking-wide transition-colors ${
-                    activeSection === item.id
-                      ? "text-foreground font-medium"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
+              {navItems.map((item) =>
+                item.isExternal ? (
+                  <Link
+                    key={item.id}
+                    to="/resources"
+                    className="text-xs tracking-wide text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`text-xs tracking-wide transition-colors ${
+                      activeSection === item.id
+                        ? "text-foreground font-medium"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                )
+              )}
             </div>
           </div>
         </div>
@@ -174,6 +156,13 @@ const Index = () => {
                 <FileText className="w-4 h-4" />
                 Medium
               </a>
+              <Link
+                to="/resources"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+              >
+                <LinkIcon className="w-4 h-4" />
+                Resources
+              </Link>
             </div>
           </div>
         </div>
@@ -257,24 +246,13 @@ const Index = () => {
               <div key={index} className="border border-border p-6 rounded-sm bg-card">
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-lg font-semibold">{project.title}</h3>
-                  <div className="flex gap-3">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      <Github className="w-4 h-4" />
-                    </a>
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </div>
+                  <Link
+                    to={`/resources#${project.slug}`}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5"
+                  >
+                    View Links
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
                 </div>
                 <p className="text-sm leading-relaxed text-foreground/90 mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
@@ -346,6 +324,13 @@ const Index = () => {
                   <FileText className="w-4 h-4" />
                   medium.com/@hassanabbasg220
                 </a>
+                <Link
+                  to="/resources"
+                  className="text-base hover:text-muted-foreground transition-colors flex items-center gap-2"
+                >
+                  <LinkIcon className="w-4 h-4" />
+                  All Resources & Links
+                </Link>
               </div>
             </div>
           </div>
