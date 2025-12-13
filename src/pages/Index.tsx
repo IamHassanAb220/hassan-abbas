@@ -11,7 +11,7 @@ const Index = () => {
   const [currentTitle, setCurrentTitle] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const titles = ["Data Engineer", "Software Engineer AI/ML"];
+  const titles = ["Software Design Engineer", "Data Engineer", "AI/ML"];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -88,7 +88,7 @@ const Index = () => {
     "Languages & Databases": ["Python", "SQL", "Java", "MySQL"],
     "Distributed Systems": ["Kafka", "PySpark", "Docker", "REST Services"],
     "Cloud & Data Engineering": ["AWS (Glue, Lambda, S3)", "Airflow", "ETL/ELT"],
-    "ML Data Systems": ["LangChain", "Redis", "Pandas"],
+    "ML Data Systems": ["LangChain", "Redis", "Pandas", "Scikit-learn", "Keras", "Tensorflow"],
   };
 
   return (
@@ -118,11 +118,10 @@ const Index = () => {
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`text-xs tracking-wide transition-colors ${
-                      activeSection === item.id
-                        ? "text-foreground font-medium"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
+                    className={`text-xs tracking-wide transition-colors ${activeSection === item.id
+                      ? "text-foreground font-medium"
+                      : "text-muted-foreground hover:text-foreground"
+                      }`}
                   >
                     {item.label}
                   </button>
@@ -141,11 +140,11 @@ const Index = () => {
         className="relative min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 md:px-8 pt-20 overflow-hidden"
       >
         {/* Floating shapes - behind content */}
-        <FloatingCircle size="300px" className="absolute top-20 left-10 animate-float opacity-10" />
-        <FloatingCircle size="200px" className="absolute bottom-40 right-20 animate-float-slow opacity-[0.08]" />
-        <FloatingCircle size="150px" className="absolute top-1/2 right-1/4 animate-float-reverse opacity-[0.12]" />
-        <FloatingTriangle size="80px" className="absolute -top-5 -right-5 rotate-45 opacity-[0.15]" />
-        <FloatingTriangle size="60px" className="absolute -bottom-3 left-10 rotate-12 opacity-10" />
+        <FloatingCircle size="300px" className="absolute top-20 left-10 animate-float opacity-35" />
+        <FloatingCircle size="200px" className="absolute bottom-40 right-20 animate-float-slow opacity-30" />
+        {/* <FloatingCircle size="150px" className="absolute top-1/2 right-1/4 animate-float-reverse opacity-30" /> */}
+        <FloatingTriangle size="80px" className="absolute -top-5 -right-5 rotate-45 opacity-30" />
+        <FloatingTriangle size="60px" className="absolute -bottom-3 left-10 rotate-12 opacity-40" />
 
         <div className="relative z-10 container max-w-4xl">
           <div className="space-y-6">
@@ -207,16 +206,14 @@ const Index = () => {
 
         <div className="container max-w-4xl" ref={experienceAnimation.ref}>
           <h2
-            className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
-              experienceAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+            className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${experienceAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
           >
             Experience
           </h2>
           <div
-            className={`space-y-12 transition-all duration-700 delay-100 ${
-              experienceAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+            className={`space-y-12 transition-all duration-700 delay-100 ${experienceAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
           >
             <div className="border-l-2 border-border pl-4 sm:pl-6">
               <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
@@ -269,9 +266,8 @@ const Index = () => {
 
         <div className="container max-w-4xl" ref={skillsAnimation.ref}>
           <h2
-            className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
-              skillsAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+            className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${skillsAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
           >
             Core Skills & Competencies
           </h2>
@@ -279,9 +275,8 @@ const Index = () => {
             {Object.entries(skills).map(([category, items], index) => (
               <div
                 key={category}
-                className={`space-y-3 transition-all duration-700 ${
-                  skillsAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
+                className={`space-y-3 transition-all duration-700 ${skillsAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <h3 className="text-base font-semibold text-foreground">{category}</h3>
@@ -311,9 +306,8 @@ const Index = () => {
 
         <div className="container max-w-4xl" ref={projectsAnimation.ref}>
           <h2
-            className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
-              projectsAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+            className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${projectsAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
           >
             Selected Projects
           </h2>
@@ -321,9 +315,8 @@ const Index = () => {
             {projects.map((project, index) => (
               <div
                 key={index}
-                className={`group relative border border-border p-4 sm:p-5 md:p-6 rounded-sm bg-card transition-all duration-700 hover:scale-[1.02] hover:border-foreground/30 ${
-                  projectsAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
+                className={`group relative border border-border p-4 sm:p-5 md:p-6 rounded-sm bg-card transition-all duration-700 hover:scale-[1.02] hover:border-foreground/30 ${projectsAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {/* Accent shape that moves on hover */}
@@ -367,21 +360,16 @@ const Index = () => {
 
         <div className="relative z-10 container max-w-4xl" ref={aboutAnimation.ref}>
           <h2
-            className={`text-sm uppercase tracking-widest text-muted-foreground mb-6 sm:mb-8 transition-all duration-700 ${
-              aboutAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+            className={`text-sm uppercase tracking-widest text-muted-foreground mb-6 sm:mb-8 transition-all duration-700 ${aboutAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
           >
             About Me
           </h2>
           <p
-            className={`text-base sm:text-lg leading-relaxed text-foreground/90 transition-all duration-700 delay-100 ${
-              aboutAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+            className={`text-base sm:text-lg leading-relaxed text-foreground/90 transition-all duration-700 delay-100 ${aboutAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
           >
-            Results-driven Data and Systems Engineer with hands-on experience building distributed data pipelines,
-            optimizing ETL processes (10× speedup on financial workloads), and deploying scalable cloud-based
-            infrastructure. Skilled in batch/stream processing, workflow orchestration, SQL performance tuning, and
-            end-to-end data system design across on-premise and cloud environments.
+            Data and Systems Engineer with a strong software engineering foundation and hands-on experience building scalable systems across on-premise and cloud environments. Brings a systems-thinking approach to designing and optimizing ETL pipelines, workflow orchestration, and batch/stream data processing, while applying core software engineering principles to data engineering problems.
           </p>
         </div>
       </section>
@@ -401,16 +389,14 @@ const Index = () => {
 
         <div className="relative z-10 container max-w-4xl" ref={contactAnimation.ref}>
           <h2
-            className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${
-              contactAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+            className={`text-sm uppercase tracking-widest text-muted-foreground mb-8 sm:mb-12 transition-all duration-700 ${contactAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
           >
             Contact
           </h2>
           <div
-            className={`space-y-6 transition-all duration-700 delay-100 ${
-              contactAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+            className={`space-y-6 transition-all duration-700 delay-100 ${contactAnimation.isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
           >
             <div>
               <p className="text-sm text-muted-foreground mb-2">Email</p>
