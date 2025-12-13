@@ -47,10 +47,10 @@ const Resources = () => {
         {/* Subtle floating shapes in header */}
         <FloatingCircle size="150px" className="absolute -top-10 right-10 opacity-[0.05] animate-float" />
         <FloatingTriangle size="50px" className="absolute top-5 left-20 opacity-10 animate-float-slow" />
-        
+
         <div className="relative z-10 container max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4 sm:mb-6 touch-target"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -96,7 +96,7 @@ const Resources = () => {
                     >
                       {/* Tiny accent shape */}
                       <div className="absolute -top-1 -right-1 w-2 h-2 border border-white/20 rotate-45 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                      
+
                       <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                         {getLinkIcon(link.type)}
                         <span className="text-xs sm:text-sm truncate">{link.label}</span>
@@ -115,14 +115,14 @@ const Resources = () => {
           <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-4 sm:mb-6">Social & Professional</h2>
           <div className="space-y-2">
             <a
-              href="mailto:hassanab220.work@gmail.com"
+              href="mailto:hello@hassanab.com"
               className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 border border-border rounded-sm bg-card hover:border-foreground/40 hover:bg-muted/20 transition-all duration-200 group touch-target gap-2"
             >
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 flex-shrink-0" />
                 <span className="text-sm">Email</span>
               </div>
-              <span className="text-xs text-muted-foreground break-all sm:text-right">hassanab220.work@gmail.com</span>
+              <span className="text-xs text-muted-foreground break-all sm:text-right">hello@hassanab.com</span>
             </a>
             <a
               href="https://linkedin.com/in/hassan-abbas-848549209"
@@ -137,7 +137,7 @@ const Resources = () => {
               <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0" />
             </a>
             <a
-              href="https://github.com/hassanabbas16"
+              href="https://github.com/IamHassanAb"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-between p-3 sm:p-4 border border-border rounded-sm bg-card hover:border-foreground/40 hover:bg-muted/20 transition-all duration-200 group touch-target"
